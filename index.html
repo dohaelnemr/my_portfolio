@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroVerse - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #080710;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --primary-purple: #8b5cf6;
+            --accent-pink: #d946ef;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 8%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(8, 7, 16, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Logo Gradient Style */
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-purple);
+        }
+
+        /* Container Scaffold */
+        .section-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 6rem 1.5rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title span {
+            color: var(--primary-purple);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink));
+            color: #fff;
+            padding: 0.75rem 1.8rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+            transition: opacity 0.3s;
+            display: inline-block;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 0.75rem 1.8rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-left: 0.8rem;
+            display: inline-block;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 90vh;
+            padding-top: 5rem;
+        }
+
+        .hero-text h2 {
+            font-size: 2.8rem;
+            line-height: 1.2;
+        }
+
+        .hero-text span {
+            color: var(--primary-purple);
+        }
+
+        .hero-text h3 {
+            color: var(--primary-purple);
+            font-size: 1.2rem;
+            margin: 0.5rem 0 1rem;
+        }
+
+        .hero-text p {
+            color: var(--text-muted);
+            max-width: 450px;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .avatar-frame {
+            width: 280px;    
+            height: 280px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-purple);
+            overflow: hidden; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .avatar-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 40% 20%; 
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Skills Section Styling */
+        .skills-section {
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+        }
+
+        .skills-section .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .skills-section .section-desc {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-size: 0.95rem;
+        }
+
+        .category-title {
+            text-align: left;
+            color: #ffffff;
+            font-size: 1.25rem;
+            margin: 2rem 0 1.2rem;
+            border-left: 4px solid var(--primary-purple);
+            padding-left: 0.8rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.8rem 1rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(139, 92, 246, 0.4);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            color: var(--primary-purple);
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .skill-name {
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        .progress-pill {
+            width: 100%;
+            height: 22px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: width 1s ease-in-out;
+        }
+
+        .progress-fill span {
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* Card Styling for Education, Experience & Services */
+        .info-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(139, 92, 246, 0.4);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-title {
+            color: var(--primary-purple);
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .card-badge {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--accent-pink);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.6rem;
+            border-radius: 12px;
+            border: 1px solid rgba(217, 70, 239, 0.3);
+        }
+
+        .card-subtitle {
+            color: #ffffff;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        /* Projects Section Styling */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            display: block;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-purple);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 160px;
+            background: #1e1b4b;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-img img {
+            transform: scale(1.05);
+        }
+
+        .project-card h4 {
+            color: var(--text-main);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .project-card h4 i {
+            font-size: 0.9rem;
+            color: var(--primary-purple);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover h4 i {
+            transform: translate(3px, -3px);
+        }
+
+        /* Contact Form */
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.8rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            .hero-text p { margin: 0 auto 2rem; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">DOHA</a>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="section-container">
+        <section id="home" class="hero">
+            <div class="hero-text">
+                <h2>Hi, I'm <span>Doha Elnemr</span></h2>
+                <h3>AI & ML Student</h3>
+                <p>I build practical and intelligent solutions using programming, data, and Machine Learning.</p>
+                <a href="Doha_Ahmed_Elnemr_Resume.pdf" class="btn-primary">Download CV</a>
+                <a href="#contact" class="btn-secondary">Contact Me</a>
+            </div>
+            <div class="avatar-frame">
+                <img src="WhatsApp_Image_2026-06-12_at_4.18.26_PM-removebg-preview.png" width="250" height="1000" alt="Profile">
+            </div>
+        </section>
+
+        <section id="about" class="card">
+            <h2 class="section-title">About <span>Me</span></h2>
+            <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem;">
+                I’m a Computer Science and Artificial Intelligence student passionate about technology, problem-solving, and building practical solutions. I have a foundation in programming, data structures, OOP, and web development, with hands-on experience through projects such as an E-Commerce Website and a Water Level Indicator Model.
+                <br><br>
+                Currently, I’m focusing on Artificial Intelligence and Machine Learning, aiming to build intelligent, data-driven solutions and grow as a future Machine Learning Engineer.
+            </p>
+            <a href="https://www.linkedin.com/in/doha-elnemr-66651a326" class="btn-primary">Read More</a>
+        </section>
+
+        <section id="education" class="card">
+            <h2 class="section-title">My <span>Education</span></h2>
+            <div class="grid-2">
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-graduation-cap" style="margin-right: 0.5rem;"></i> Bachelor of Computer Science & Artificial Intelligence</h3>
+                        <span class="card-badge">2024 - Present</span>
+                    </div>
+                    <h4 class="card-subtitle">Faculty of Computers & Artificial Intelligence</h4>
+                    <p class="card-desc">Specializing in Artificial Intelligence and Machine Learning. Coursework includes Data Structures, Algorithms, OOP, Database Systems, Linear Algebra, and Machine Learning Fundamentals.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="skills-section card">
+            <h2 class="section-title">My Work <span>Skills</span></h2>
+            <p class="section-desc">Here are the key technical skills, programming languages, and tools I use to build robust applications.</p>
+
+            <h3 class="category-title">Technical Skills</h3>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fab fa-python"></i></div>
+                    <h4 class="skill-name">Python</h4>
+                    <div class="progress-pill">
+                        <div class="progress-fill" style="width: 95%;"><span>95%</span></div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-code"></i></div>
+                    <h4 class="skill-name">C++</h4>
+                    <div class="progress-pill">
+                        <div class="progress-fill" style="width: 90%;"><span>90%</span></div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fab fa-java"></i></div>
+                    <h4 class="skill-name">Java</h4>
+                    <div class="progress-pill">
+                        <div class="progress-fill" style="width: 85%;"><span>85%</span></div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-cubes"></i></div>
+                    <h4 class="skill-name">OOP</h4>
+                    <div class="progress-pill">
+                        <div class="progress-fill" style="width: 92%;"><span>92%</span></div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-network-wired"></i></div>
+                    <h4 class="skill-name">Data Structures</h4>
+                    <div class="progress-pill">
+                        <div class="progress-fill" style="width: 88%;"><span>88%</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-title">Tools & Libraries</h3>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-calculator"></i></div>
+                    <h4 class="skill-name">NumPy</h4>
+                    <div class="progress-pill">
+                        <div class="progress-fill" style="width: 90%;"><span>90%</span></div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-table"></i></div>
+                    <h4 class="skill-name">Pandas</h4>
+                    <div class="progress-pill">
+                        <div class="progress-fill" style="width: 87%;"><span>87%</span></div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
+                    <h4 class="skill-name">Matplotlib</h4>
+                    <div class="progress-pill">
+                        <div class="progress-fill" style="width: 85%;"><span>85%</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="card">
+            <h2 class="section-title">Work <span>Experience</span></h2>
+            <div class="grid-2" style="margin-bottom: 3rem;">
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Machine Learning Engineer Trainee</h3>
+                        <span class="card-badge">2026 - Present</span>
+                    </div>
+                    <h4 class="card-subtitle">Digital Egypt Pioneers Initiative (DEPI) — Microsoft</h4>
+                    <p class="card-desc">Intensive training in Machine Learning Engineering, Python, Data Analysis, Machine Learning, Deep Learning, and AI, with hands-on projects and practical applications.</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">Services I <span>Offer</span></h2>
+            <div class="grid-2">
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-brain" style="margin-right: 0.5rem;"></i> Machine Learning</h3>
+                    </div>
+                    <p class="card-desc">Building and training machine learning models to solve real-world problems and make predictions from data.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-chart-pie" style="margin-right: 0.5rem;"></i> Data Analysis</h3>
+                    </div>
+                    <p class="card-desc">Analyzing and exploring data to discover patterns, insights, and meaningful information.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-robot" style="margin-right: 0.5rem;"></i> AI Solutions</h3>
+                    </div>
+                    <p class="card-desc">Developing intelligent solutions using Artificial Intelligence techniques and modern technologies.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fab fa-python" style="margin-right: 0.5rem;"></i> Python Development</h3>
+                    </div>
+                    <p class="card-desc">Building practical projects and applications using Python and writing clean, efficient code.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="card">
+            <h2 class="section-title">My <span>Projects</span></h2>
+            <div class="projects-grid">
+                <a href="https://www.figma.com/design/IYdChwR3TbVou7tQ0UJJED/avada-kadvara?node-id=383-48&t=XPmJSAnoE1Ipnw47-1" target="_blank" class="project-card">
+                    <div class="project-img">
+                        <img src="Screenshot 2026-09-01 235838.png" alt="E-Commerce UI/UX">
+                    </div>
+                    <h4> E-Commerce UI/UX <i class="fas fa-external-link-alt"></i></h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.3rem;">Figma · Wireframing · Prototyping · User Interface Design</p>
+                </a>
+
+                <a href="https://github.com/dohaelnemr/Shop.co-Ecommerce.git" target="_blank" class="project-card">
+                    <div class="project-img">
+                        <img src="coshop.png" alt="E-Commerce website">
+                    </div>
+                    <h4> E-Commerce Website <i class="fas fa-external-link-alt"></i></h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.3rem;">HTML · CSS · Bootstrap · MySQL . PHP</p>
+                </a>
+                <a href="Water_level_indicator_project[1].pptx" target="_blank" class="project-card">
+                    <div class="project-img">
+                        <img src="waterlevel.png" alt="Water Level Indicator">
+                    </div>
+                    <h4> Water Level Indicator <i class="fas fa-external-link-alt"></i></h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.3rem;">Electronics . BC547 Transistors . Circuit Design . Logic Gates</p>
+                </a>
+            </div>
+        </section>
+
+        <section id="contact" class="card grid-2">
+            <div>
+                <h2 class="section-title">Contact <span>Me</span></h2>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;"><i class="fas fa-envelope"></i> dohaelnemr8@gmail.com</p>
+                <p style="color: var(--text-muted);"><i class="fas fa-phone"></i> 01014378376</p>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    <br>
+                    <i class="fab fa-github"></i> <a href="https://github.com/dohaelnemr" target="_blank" style="color: var(--text-muted); text-decoration: none;">GitHub Profile</a>
+            </p>
+            </div>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name">
+                <input type="email" placeholder="Your Email">
+                <textarea rows="4" placeholder="Your Message"></textarea>
+                <button type="submit" class="btn-
